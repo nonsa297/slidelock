@@ -44,15 +44,17 @@
 			noteText: "Proves you're human",
 			lockText: "Locked",
 			unlockText: "Unlocked",
-			iconURL: "../arrow_right.png",
 			inputID: "sliderInput",
 			onCSS: "#333",
 			offCSS: "#aaa",
+			// TODO: these values need to be more secure
+			// consider getting them from the server, etc.
 			inputValue: 1,
 			saltValue: 9,
 			checkValue: 10,
 			js_check: "js_check",
-			submitID: "#submit"
+			submitID: "#submit",
+			tabIndex: 0
 									 
 		};
 		
@@ -64,9 +66,9 @@
 		// insert ui function
 		function insertLocker() {
 			
-			var uiHTML = '<p class="slider"><label for="slider">' + opts.labelText + '<br/><span class="quiet">' + opts.noteText + '</span></label>';
-			uiHTML += '<div id="slider" title="Slide to unlock this form"></div></p>';
-			uiHTML += '<p class="quiet"><span id="locked">' + opts.lockText + '</span><img src="' + opts.iconURL + '" alt="Slide to the right" /><span id="unlocked">' + opts.unlockText + '</span></p>';
+			var uiHTML = '<p class="slider"><label for="slider" id="sliderLabel">' + opts.labelText + '<br/><span class="quiet">' + opts.noteText + '</span></label>';
+			uiHTML += '<div id="slider" title="Slide to unlock this form" tabindex="' + opts.tabIndex + '"></div></p>';
+			uiHTML += '<p class="quiet"><span id="locked">' + opts.lockText + '</span><img src="' + opts.iconURL + '" alt="Slide to the right" class="ui-icon ui-icon-arrowthick-2-e-w" /><span id="unlocked">' + opts.unlockText + '</span></p>';
 			uiHTML += '<input type="hidden" name="' + opts.inputID + '" value="" id="' + opts.inputID + '" />';
 			
 			return uiHTML;
@@ -93,12 +95,18 @@
 				max: opts.inputValue,
 				step: opts.inputValue,
 				stop: function(event, ui) {
-			
+					
 					// set value of usercheck
 					$("#" + opts.inputID, obj).val(ui.value + opts.saltValue);
 					
 					// enable submit button
 					if($("#" + opts.inputID, obj).val() == opts.checkValue) {
+						
+						// set value of aria-valuenow & aria-valuetext
+						$(".ui-slider-handle").attr({
+							'aria-valuenow': ui.value,
+							'aria-valuetext': 'Form is unlocked'
+						});
 						
 						// change color of labels
 						$("#locked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
@@ -108,7 +116,13 @@
 						$(submitButton).attr('disabled', ''); 
 					
 					}else{
-					
+						
+						// set value of aria-valuenow & aria-valuetext
+						$(".ui-slider-handle").attr({
+							'aria-valuenow': ui.value,
+							'aria-valuetext': 'Form is locked'
+						});
+						
 						// change color of labels
 						$("#locked", obj).css({'color': opts.onCSS, 'font-weight': 'bold'});
 						$("#unlocked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
@@ -122,18 +136,24 @@
 				
 			});
 			
-			// reset slider control on submit button click
-			$(submitButton).click(function() {
+			// set WAI-ARIA attributes on the slider element
+			$(".ui-slider").attr({ 
+				'role': 'slider',
+				'aria-labeledby': 'sliderLabel'
+			});
+			$(".ui-slider-handle").attr({
+				'role': 'button',
+				'aria-valuemin': 0,
+				'aria-valuemax': 1,
+				'aria-valuenow': 0,
+				'aria-valuetext': 'Form is locked'
+			});
+			
+			// reset slider control on submit or reset button click
+			$("input:submit, input:reset").click(function() {
 										   
 				$("#slider").slider("option", "value", 0);						   
 										   
-			});
-			
-			// reset slider control on reset button click
-			$("input:reset").click(function() {
-											
-				$("#slider").slider("option", "value", 0);								
-											
 			});
 								  
 		});
