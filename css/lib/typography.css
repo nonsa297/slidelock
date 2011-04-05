@@ -1,20 +1,3 @@
-/* custom fonts */
-@font-face {
-	font-family: 'Rockwell';
-	src: url('../fonts/rockwell-webfont.eot');
-	src: local('Rockwell'), local('Rockwell'), url('../fonts/rockwell-webfont.woff') format('woff'), url('../fonts/rockwell-webfont.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'RockwellExtraBold';
-	src: url('../fonts/rockwell_extra_bold-webfont.eot');
-	src: local('Rockwell Extra Bold'), local('RockwellExtraBold'), url(../fonts/'rockwell_extra_bold-webfont.woff') format('woff'), url('../fonts/rockwell_extra_bold-webfont.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 html { -webkit-font-smoothing: antialiased; }
 
 /* 
@@ -27,7 +10,7 @@ body { font-size: 16px; color: #444; }
 
 /* Default and high x-height fonts. */
 body,p,ul,ol,dl,input,textarea { font-family: Helvetica, Arial, sans-serif; }
-h1,h2,h3,h4,h5,h6,legend,label,th,caption,dt { font-family: 'Rockwell', Georgia, serif; }
+h1,h2,h3,h4,h5,h6,legend,label,th,caption,dt { font-family: Georgia, "Times New Roman", serif; }
 
 /* Low x-height fonts 
 body,p,ul,ol,dl,input,textarea { font-family: Verdana, Trebuchet, sans-serif; }
