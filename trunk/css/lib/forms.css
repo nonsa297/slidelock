@@ -1,0 +1,59 @@
+label { font-weight: bold; }
+
+/* Fieldsets */
+fieldset { padding: 1.4em; margin: 0 0 1.5em 0; border: 1px solid #ddd; width: 100%; max-width: 650px; }
+legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
+
+/* Textareas */
+textarea { margin: 0.5em 0.5em 0 0; }
+textarea { padding: .4em; }
+
+/* align checkboxes, radios, text inputs with their label */
+input[type="radio"] { vertical-align: baseline; }
+input[type="checkbox"] { vertical-align: baseline; }
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+
+form p { margin: 0 0 .5em 0; }
+p label { float: left; width: 264px; margin-right: 24px; text-align: right; }
+
+p input { width: 264px; }
+p select { width: 264px; }
+
+p input.button, p input.checkbox, p input.radio { width: auto; }
+
+p.checkbox, p.radio { margin-left: 288px; }
+p.checkbox label, p.radio label { float: none; }
+p.checkbox input, p.radio input { width: auto; margin-right: 12px; }
+
+input[type="submit"] { margin-left: 288px; }
+input[disabled] { font-style: italic; color: #ccc; cursor: not-allowed; }
+
+/* set style of placeholder text */
+input::-webkit-input-placeholder { }
+
+/* CSS3/HTML Form validation */
+input:focus:required:invalid { background: pink url(../../chrome/error.png) 244px 1px no-repeat; }
+input:required:valid { background: #fff url(../../chrome/tick.png) 244px 1px no-repeat; }
+
+/* Login Form */
+#login fieldset { width: 213px; margin-left: 24px; float: left; }
+#login input[type=email], 
+#login input[type=text], 
+#login input[type=password] { width: 213px; }
+#login label { width: 213px; margin-right: 0; text-align: left; }
+#login p.checkbox { margin-left: 0; }
+#login input[type=submit] { margin-left: 0; }
+#login p.small { margin: 18px 0 0 0; }
+
+/* User Messages */
+.success { padding: 4px; background-color: rgba(197,197,197, .7); font-weight: bold; color: #369; }
+.error { padding: 4px; background-color: #900; border-left: 2px solid #000; color: #fff; font-weight: bold; }
+.notice { padding: 4px; background-color: #cc6; border-left: 2px solid #960; color: #960; font-weight: bold; }
+
+/* Special Form Fields */
+#feet, #inches { width: 50px; }
+
+/* Editable Content */
+*[contenteditable=true]:hover, *[contenteditable=true]:focus { background: #c93; }
