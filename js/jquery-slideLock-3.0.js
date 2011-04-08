@@ -50,11 +50,12 @@
 			// TODO: these values need to be more secure
 			// consider getting them from the server, etc.
 			inputValue: 1,
-			saltValue: 9,
-			checkValue: 10,
+			//saltValue: 9,
+			//checkValue: 10,
 			js_check: "js_check",
 			submitID: "#submit",
-			tabIndex: 0
+			tabIndex: 0,
+			debug: true // set to false in production
 									 
 		};
 		
@@ -97,41 +98,55 @@
 				stop: function(event, ui) {
 					
 					// set value of usercheck
-					$("#" + opts.inputID, obj).val(ui.value + opts.saltValue);
+					$("#" + opts.inputID, obj).val(ui.value);
+					var salt = '';
 					
-					// enable submit button
-					if($("#" + opts.inputID, obj).val() == opts.checkValue) {
+					// ajax request to verify input value against salt
+					$.post(
+						'include/check_salt.php', 
+						{ inputvalue: $("#" + opts.inputID, obj).val() }, 
+						function(data) {
+							salt = data;
+							if(opts.debug) console.log(salt);
+							
+							// enable submit button
+							// if($("#" + opts.inputID, obj).val() == opts.checkValue) {
+							if(salt === "true") {
+								
+								// set value of aria-valuenow & aria-valuetext
+								$(".ui-slider-handle").attr({
+									'aria-valuenow': ui.value,
+									'aria-valuetext': 'Form is unlocked'
+								});
+								
+								// change color of labels
+								$("#locked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
+								$("#unlocked", obj).css({'color': opts.onCSS, 'font-weight': 'bold'});
+								
+								// enable
+								$(submitButton).attr('disabled', ''); 
+							
+							}else{
+								
+								// set value of aria-valuenow & aria-valuetext
+								$(".ui-slider-handle").attr({
+									'aria-valuenow': ui.value,
+									'aria-valuetext': 'Form is locked'
+								});
+								
+								// change color of labels
+								$("#locked", obj).css({'color': opts.onCSS, 'font-weight': 'bold'});
+								$("#unlocked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
+								
+								// disable
+								$(submitButton).attr('disabled', 'disabled');
+							
+							}
+							
+						}
 						
-						// set value of aria-valuenow & aria-valuetext
-						$(".ui-slider-handle").attr({
-							'aria-valuenow': ui.value,
-							'aria-valuetext': 'Form is unlocked'
-						});
-						
-						// change color of labels
-						$("#locked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
-						$("#unlocked", obj).css({'color': opts.onCSS, 'font-weight': 'bold'});
-						
-						// enable
-						$(submitButton).attr('disabled', ''); 
-					
-					}else{
-						
-						// set value of aria-valuenow & aria-valuetext
-						$(".ui-slider-handle").attr({
-							'aria-valuenow': ui.value,
-							'aria-valuetext': 'Form is locked'
-						});
-						
-						// change color of labels
-						$("#locked", obj).css({'color': opts.onCSS, 'font-weight': 'bold'});
-						$("#unlocked", obj).css({'color': opts.offCSS, 'font-weight': 'normal'});
-						
-						// disable
-						$(submitButton).attr('disabled', 'disabled');
-					
-					}
-					
+					);
+						   
 				}
 				
 			});
