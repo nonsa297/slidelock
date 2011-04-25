@@ -1,7 +1,7 @@
 # Apache configuration file
 
 # Serve this site as PHP 5 - Media Temple requirement
-# AddHandler php5-script .php
+AddHandler php5-script .php
 
 # Force the latest IE version
 <IfModule mod_setenvif.c>
@@ -97,7 +97,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteBase /
 
-RewriteRule ^([A-Za-z0-9-]+)/?$ $1.php [L]
+RewriteRule ^(\w+)$ $1.php [L]
 
 
 # without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist (e.g. “/blog/hello”)
