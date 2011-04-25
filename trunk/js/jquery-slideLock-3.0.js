@@ -54,8 +54,7 @@
 			ariavaluemax: 1,
 			ariavaluenow: 0,
 			ariaLocked: 'Form is locked',
-			ariaUnlocked: 'Form is unlocked',
-			debug: true
+			ariaUnlocked: 'Form is unlocked'
 									 
 		};
 		
@@ -65,7 +64,7 @@
 		function insertLocker() {
 			
 			var uiHTML = '<p class="slider"><label for="slider" id="sliderLabel">' + opts.labelText + '<br/><span class="quiet">' + opts.noteText + '</span></label>';
-			uiHTML += '<div id="slider" title="Slide to unlock this form" tabindex="' + opts.tabIndex + '"></div></p>';
+			uiHTML += '<div id="slider" title="Slide to unlock this form"></div></p>';
 			uiHTML += '<p class="quiet"><span id="locked">' + opts.lockText + '</span><img src="' + opts.iconURL + '" alt="Slide to the right" class="ui-icon ui-icon-arrowthick-2-e-w" /><span id="unlocked">' + opts.unlockText + '</span></p>';
 			uiHTML += '<input type="hidden" name="' + opts.inputID + '" value="" id="' + opts.inputID + '" />';
 			
@@ -83,7 +82,7 @@
 			
 			// disable submit button
 			$(submitButton).css('margin-top', '15px').attr('disabled', 'disabled');
-			
+		
 			// slider functionality
 			$("#slider", obj).slider({
 				
@@ -96,19 +95,14 @@
 					
 					// set value of usercheck
 					$("#" + opts.inputID, obj).val(ui.value);
-					var salt = '';
 					
 					// ajax request to verify input value against salt
 					$.post(
 						'include/check_salt.php', 
 						{ inputvalue: $("#" + opts.inputID, obj).val() }, 
 						function(data) {
-							salt = data;
-							if(opts.debug) console.log(salt);
-							
 							// enable submit button
-							// if($("#" + opts.inputID, obj).val() == opts.checkValue) {
-							if(salt === "true") {
+							if(data === "true") {
 								
 								// set value of aria-valuenow & aria-valuetext
 								$(".ui-slider-handle").attr({
@@ -147,6 +141,11 @@
 				}
 				
 			});
+			
+			// set tab index of slider
+			var submitIndex = $(opts.submitID).attr("tabindex");
+			(opts.tabIndex == 0) ? (opts.tabIndex = submitIndex - 1) : opts.tabIndex;
+			$("a.ui-slider-handle").attr("tabindex", opts.tabIndex);
 			
 			// set WAI-ARIA attributes on the slider element
 			$(".ui-slider").attr({ 
