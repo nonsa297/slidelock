@@ -17,15 +17,15 @@
 	*** REQUIRES jQuery UI >= 1.8  ***
 	
 	Version 3.0
-		- TODO: improved accessibility
-				clean up CSS
-				rewrite for speed and clarity
+		- simplified options
+		- better CSS integration
+		- WAI-ARIA compliant
 	
 	Version 2.1
 		- Now resets slider controls correctly when an form is submitted
 		  via AJAX. 
 	
-	Version: 2.0
+	Version 2.0
 		- Fixed a bug that causes the plugin to fail when the ID of
 		  the inputs are changed -- thanks to Steve Kruse <steve@wnywebsites.com>
 		  
@@ -47,22 +47,19 @@
 			inputID: "sliderInput",
 			onCSS: "#333",
 			offCSS: "#aaa",
-			// TODO: these values need to be more secure
-			// consider getting them from the server, etc.
 			inputValue: 1,
-			//saltValue: 9,
-			//checkValue: 10,
-			js_check: "js_check",
 			submitID: "#submit",
 			tabIndex: 0,
-			debug: true // set to false in production
+			ariavaluemin: 0,
+			ariavaluemax: 1,
+			ariavaluenow: 0,
+			ariaLocked: 'Form is locked',
+			ariaUnlocked: 'Form is unlocked',
+			debug: true
 									 
 		};
 		
 		var opts = $.extend(defaults, options);
-		
-		// remove hidden form field to allow for server side validation
-		$("#" + opts.js_check).remove();
 		
 		// insert ui function
 		function insertLocker() {
@@ -116,7 +113,7 @@
 								// set value of aria-valuenow & aria-valuetext
 								$(".ui-slider-handle").attr({
 									'aria-valuenow': ui.value,
-									'aria-valuetext': 'Form is unlocked'
+									'aria-valuetext': opts.ariaUnlocked
 								});
 								
 								// change color of labels
@@ -131,7 +128,7 @@
 								// set value of aria-valuenow & aria-valuetext
 								$(".ui-slider-handle").attr({
 									'aria-valuenow': ui.value,
-									'aria-valuetext': 'Form is locked'
+									'aria-valuetext': opts.ariaLocked
 								});
 								
 								// change color of labels
@@ -158,10 +155,10 @@
 			});
 			$(".ui-slider-handle").attr({
 				'role': 'button',
-				'aria-valuemin': 0,
-				'aria-valuemax': 1,
-				'aria-valuenow': 0,
-				'aria-valuetext': 'Form is locked'
+				'aria-valuemin': opts.ariavaluemin,
+				'aria-valuemax': opts.inputValue,
+				'aria-valuenow': opts.ariavaluenow,
+				'aria-valuetext': opts.ariaLocked
 			});
 			
 			// reset slider control on submit or reset button click
