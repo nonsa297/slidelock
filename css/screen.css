@@ -28,14 +28,31 @@
 	1      		2      		3      		4      		5     
 	120px  		264px  		408px  		552px  		696px   (24px/1.5em gutters)
 	7.5em		16.5em		25.5em		34.5em		43.5em
+	
+	COLORS:
+	#695f3f;
+	#ecb500;
+	#271e01;
+	#a1c5df;
+	#ddd;
 */
 
 /* body, general styles ---------------------------------------------------------- */
-body { padding: 0 2.25em; margin: 0 auto; width: 43.5em; }
+body { padding: 0 2.25em; margin: 0 auto; width: 43.5em; background: #a1c5df; }
 
 
 /* header ------------------------------------------------------------------------ */
 header { width: 100%; float: left; }
+hgroup { width: 396px; margin: 40px 24px 36px 0; text-shadow: 0px 1px 1px #ddd; float: left; }
+hgroup h1 { font-size: 96px; font-family: "Raleway", Helvetica, Arial, sans-serif; color: #695f3f; }
+hgroup h2 { font-size: 18px; font-family: "Raleway", Helvetica, Arial, sans-serif; color: #271e01; letter-spacing: 0; margin-top: 14px; }
+#logo { width: 60px; margin: 30px 24px 0 24px; float: left; }
+
+/* navigation -------------------------------------------------------------------- */
+nav { width: 144px; font-size: 18px; float: left; margin: 48px 0 0 24px; }
+nav ul { list-style: none; width: 144px; margin: 0; }
+nav ul li { float: left; width: 72px; margin: 20px 0 0 0; text-align: center; }
+#download { line-height: 3; width: 142px; border: 1px solid #271e01; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background: #ecb500; box-shadow: 0px 0px 5px #271e01; -moz-box-shadow: 0px 0px 5px #271e01; -webkit-box-shadow: 0px 0px 5px #271e01; }
 
 
 /* content ----------------------------------------------------------------------- */
@@ -43,7 +60,7 @@ header { width: 100%; float: left; }
 
 
 /* footer ------------------------------------------------------------------------ */
-footer { float: left; width: 100%; }
+footer { float: left; width: 100%; text-align: center; }
 
 
 .left { margin-left: 0; }

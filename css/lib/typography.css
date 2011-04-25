@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 html { -webkit-font-smoothing: antialiased; }
 
 /* 
@@ -9,8 +11,7 @@ html { -webkit-font-smoothing: antialiased; }
 body { font-size: 16px; color: #444; }
 
 /* Default and high x-height fonts. */
-body,p,ul,ol,dl,input,textarea { font-family: Helvetica, Arial, sans-serif; }
-h1,h2,h3,h4,h5,h6,legend,label,th,caption,dt { font-family: Georgia, "Times New Roman", serif; }
+body,p,ul,ol,dl,input,textarea, h1,h2,h3,h4,h5,h6,legend,label,th,caption,dt { font-family: "Raleway", Helvetica, Arial, sans-serif; }
 
 /* Low x-height fonts 
 body,p,ul,ol,dl,input,textarea { font-family: Verdana, Trebuchet, sans-serif; }
