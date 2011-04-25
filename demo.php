@@ -58,17 +58,17 @@
         	<fieldset>
             	<legend>Test Form</legend>
                 <?php if(isset($message)) foreach($message as $m) print $m; ?>
-                <p><label for="name">Name:</label><input type="text" name="name" id="name" placeholder="Your Name" required /></p>
+                <p><label for="name">Name:</label><input type="text" name="name" id="name" placeholder="Your Name" required tabindex="1" /></p>
                 <p>
                 	<label for="color">Favorite Color:</label>
-                	<select name="color" id="color" required>
+                	<select name="color" id="color" required tabindex="2">
                     	<option value="red">Red</option>
                         <option value="green">Green</option>
                         <option value="blue">Blue</option>
                     </select>    
                 </p>
-                <p><label for="comments">Comments:</label><textarea name="name" id="name" required></textarea></p>
-                <input type="submit" name="submit" id="submit" value="Submit" />
+                <p><label for="comments">Comments:</label><textarea name="comments" id="comments" required tabindex="3"></textarea></p>
+                <input type="submit" name="submit" id="submit" value="Submit" tabindex="5" />
             </fieldset>
         </form>
     </section>
