@@ -23,7 +23,7 @@
         <img src="images/logo.png" id="logo" />
         <nav>
         	<ul>
-            	<li id="download"><a href="#">Download</a></li>
+            	<li id="download"><a href="http://code.google.com/p/slidelock/">Download</a></li>
                 <li><a href="demo.php">Demo</a></li>
                 <li><a href="docs.php">Docs</a></li>
             </ul>
