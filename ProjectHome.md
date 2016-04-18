@@ -1,0 +1,1 @@
+slideLock is a jQuery plugin alternative to traditional CAPTCHA solutions.
